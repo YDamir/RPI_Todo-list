@@ -1,0 +1,35 @@
+.new-task {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: fit-content;
+    margin-bottom: 40px;
+    margin: 10px;
+}
+
+.new-task h2 {
+    width: fit-content;
+    margin-bottom: 10px;
+    margin-top: 0;
+}
+
+.new-task input {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.new-task button {
+    padding: 10px 30px;
+    background-color: #2f80ed;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.new-task button:hover {
+    background-color: #285e8e;
+}
