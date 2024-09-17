@@ -4,21 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Давлетбаев Дамир Салахиддинович</title>
-    <link rel="stylesheet" href="/css/common.css">
-    <link rel="stylesheet" href="/css/task-add.css">
-    <link rel="stylesheet" href="/css/task.css">
-    <link rel="stylesheet" href="/css/task-area.css">
-    <link rel="stylesheet" href="/css/button-clear.css">
-    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/markup/css/common.css">
+    <link rel="stylesheet" href="/markup/css/task-add.css">
+    <link rel="stylesheet" href="/markup/css/task.css">
+    <link rel="stylesheet" href="/markup/css/task-area.css">
+    <link rel="stylesheet" href="/markup/css/button-clear.css">
+    <link rel="stylesheet" href="/markup/css/normalize.css">
 </head>
 <body>
+    <header>
+        <h1>Список задач</h1>
+    </header>
     <main>
+
         <section class="new-task">
-            
+            <h2>Новая задача</h2>
+            <form class="new-task_form">
+                <input type="text" placeholder="Название задачи...">
+                <button>+ Добавить</button>
+            </form>
         </section>
 
-        <div class="tasks"> <!--taskboard-->
-            <!-- <section class="task backlog">
+        <div class="tasks">
+
+            <section class="task backlog">
                 <h3>Бэклог</h3>
     
                 <ul>
@@ -55,9 +64,10 @@
                 </ul>
     
                 <button>x Очистить</button>
-            </section> -->
+            </section>
+
         </div>
+
     </main>
-    <script src="/src/main.js" type="module"></script>
 </body>
 </html>

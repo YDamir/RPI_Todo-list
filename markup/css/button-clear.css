@@ -1,0 +1,15 @@
+.resyclebin button {
+    background-color: #c9666c;
+    padding: 10px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.resyclebin button:hover {
+    background-color: #c9302c;
+}

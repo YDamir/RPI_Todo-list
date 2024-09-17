@@ -1,0 +1,72 @@
+.task {
+    padding: 15px;
+    width: 26%;
+    margin-bottom: 20px;
+}
+
+h3 {
+    margin-bottom: 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: fit-content;
+}
+
+.backlog h3 {
+    background-color: #e3e3e3;
+    color: rgb(100, 100, 100);
+}
+
+.inprogress h3 {
+    background-color: #d6e7ff;
+    color: #8f9bac;
+}
+
+.completed h3 {
+    background-color: #d7f9e0;
+    color: #7e9283;
+}
+
+.resyclebin h3 {
+    background-color: #fbe3e3;
+    color: #9c8d8d;
+}
+
+ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+li {
+    background-color: white;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    position: relative;
+}
+
+li::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    border-radius: 10px 0 0 10px;
+}
+
+.backlog li::before {
+    background-color: #e3e3e3;
+}
+
+.inprogress li::before {
+    background-color: #d6e7ff;
+}
+
+.completed li::before {
+    background-color: #d7f9e0;
+}
+
+.resyclebin li::before {
+    background-color: #fbe3e3;
+}
