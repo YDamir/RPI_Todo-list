@@ -7,14 +7,18 @@ import TaskComponent from '/src/view/task-component.js';
 const bodyContainer = document.querySelector('body');
 const formContainer = document.querySelector('.new-task');
 const taskListContainer = document.querySelector('.tasks')
-const taskConstainer = document.querySelector('tasks');
+// const taskConstainer = document.querySelector('.task .backlog');
 
 render(new HeaderComponent(), bodyContainer, RenderPosition.BEFOREBEGIN);
 render(new FormAddTaskComponent(), formContainer);
 
-render(new TaskListComponent(), taskListContainer);
-render(new TaskListComponent(), taskListContainer);
-render(new TaskListComponent(), taskListContainer);
-render(new TaskListComponent(), taskListContainer);
-
-render(new TaskComponent(), taskConstainer);
+for(let i = 0; i < 4; i++)
+    {  const taskListComponent = new TaskListComponent();
+        render(taskListComponent, taskListContainer);
+        for(let i = 0; i < 3; i++)
+            {
+                render(new TaskComponent(), taskListComponent.getElement());
+               
+            }
+        
+    }

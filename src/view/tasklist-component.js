@@ -4,7 +4,7 @@ function createTaskListComponentTemplate() {
     return (
         `<section class="task backlog">
             <h3>Название блока</h3>
-    
+            
             <ul>
                     
             </ul>
