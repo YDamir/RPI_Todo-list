@@ -3,6 +3,7 @@ import TaskComponent from '/src/view/task-component.js';
 import TaskBoardComponent from '/src/view/taskboard-component.js';
 import {render} from '/src/framework/render.js';
 import {Status, StatusLabel} from '/src/const.js';
+import ClearButtonComponent from '/src/view/clear-button-component.js';
 
 export default class TasksBoardPresenter {
  tasksBoardComponent = new TaskBoardComponent()
@@ -32,6 +33,10 @@ export default class TasksBoardPresenter {
           const taskComponent = new TaskComponent({task: this.boardTasks[j]});
           render(taskComponent, tasksListComponent.getElement());
         }
+      }
+      if (i === 3) { // (status === Status.RESYCLEBIN)
+        const clearButtonComponent = new ClearButtonComponent();
+        render(clearButtonComponent, tasksListComponent.getElement());
       }
     }
   }
