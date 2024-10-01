@@ -70,3 +70,12 @@ li::before {
 .resyclebin li::before {
     background-color: #fbe3e3;
 }
+
+.no-task {
+    border: 1px dashed #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    color: #999;
+    font-style: italic;
+    margin-top: 10px;
+}
