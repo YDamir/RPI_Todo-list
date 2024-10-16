@@ -99,4 +99,4 @@ export const tasks = [
         'title': 'Поиграть в игру',
         'status': 'resyclebin',
     },
-]
+];

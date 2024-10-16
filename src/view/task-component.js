@@ -2,9 +2,9 @@ import {AbstractComponent} from '/src/framework/view/abstract-component.js';
 
 function createTaskComponentTemplate(task) {
     const {title, status} = task;
-      return (
-          `<li class="${status}">${title}</li>`
-      );
+    return (
+        `<li class="${status}">${title}</li>`
+    );
 }
 
 export default class TaskComponent extends AbstractComponent {

@@ -10,27 +10,29 @@ const RenderPosition = {
 function createElement(template) {
     const newElement = document.createElement('div');
     newElement.innerHTML = template;
-  
+
     return newElement.firstElementChild;
 }
-  
+
 function render(component, container, place = RenderPosition.BEFOREEND) {
     if (!(component instanceof AbstractComponent)) {
       throw new Error('Can render only components');
     }
+
     if (container === null) {
       throw new Error('Container element doesn\'t exist');
     }
+
     container.insertAdjacentElement(place, component.element);
 }
 
-// Добавляем функцию remove
 function remove(component) {
     if (!(component instanceof AbstractComponent)) {
       throw new Error('Can remove only components');
     }
-    component.element.remove(); // Удаляем элемент из DOM
-    component.removeElement(); // Очищаем ссылку на элемент в компоненте
+    
+    component.element.remove();
+    component.removeElement();
 }
 
 export {RenderPosition, createElement, render, remove};

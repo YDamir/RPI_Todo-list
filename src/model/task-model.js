@@ -1,24 +1,22 @@
-import { tasks } from '/src/mock/task.js';
+import {tasks} from '/src/mock/task.js';
 
 export default class TasksModel {
-  #boardTasks = tasks; // Приватное поле для хранения задач
+  #boardTasks = tasks;
+  #observers = [];
 
   get tasks() {
-    return this.#boardTasks; // Возвращаем массив задач
+    return this.#boardTasks;
   }
 
-  // Функция для добавления задачи в модель
   addTask(newTask) {
     this.#boardTasks.push(newTask);
+    this.#notifyObservers();
   }
 
-  // Функция для очистки задач в корзине
   clearTasksInResycleBin() {
     this.#boardTasks = this.#boardTasks.filter(task => task.status !== 'resyclebin');
+    this.#notifyObservers();
   }
-
-  // Наблюдатели (например, для обновлений модели)
-  #observers = [];
 
   addObserver(observer) {
     this.#observers.push(observer);

@@ -1,4 +1,4 @@
-import { AbstractComponent } from '/src/framework/view/abstract-component.js';
+import {AbstractComponent} from '/src/framework/view/abstract-component.js';
 
 function createFormAddTaskComponentTemplate() {
   return (
@@ -16,21 +16,22 @@ export default class FormAddTaskComponent extends AbstractComponent {
   constructor({ onSubmit }) {
     super();
     this.#handleSubmit = onSubmit;
-    this.element.addEventListener('submit', this.#submitHandler); // Добавляем обработчик события
+    this.element.addEventListener('submit', this.#submitHandler);
   }
 
   get template() {
     return createFormAddTaskComponentTemplate();
   }
 
-  // Обработчик отправки формы
   #submitHandler = (evt) => {
     evt.preventDefault();
-    const taskTitle = this.element.querySelector('#add-task').value.trim(); // Получаем значение из поля ввода
+    const taskTitle = this.element.querySelector('#add-task').value.trim();
+
     if (!taskTitle) {
-      return; // Если поле пустое, ничего не делаем
+      return;
     }
-    this.#handleSubmit(taskTitle); // Вызываем переданный callback для создания новой задачи
-    this.element.querySelector('#add-task').value = ''; // Очищаем поле ввода после добавления задачи
+
+    this.#handleSubmit(taskTitle);
+    this.element.querySelector('#add-task').value = '';
   };
 }

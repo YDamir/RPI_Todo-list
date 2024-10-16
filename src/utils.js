@@ -1,4 +1,3 @@
 export function generateId() {
-    return String(Date.now() + Math.random());
-  }
-  
+  return String(Date.now() + Math.random());
+}

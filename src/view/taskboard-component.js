@@ -2,9 +2,7 @@ import {AbstractComponent} from '/src/framework/view/abstract-component.js';
 
 function createTaskBoardComponentTemplate() {
     return (
-        `<div class="tasks">
-
-        </div>`
+        `<div class="tasks"></div>`
     );
 }
 
