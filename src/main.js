@@ -41,3 +41,4 @@ tasksModel.init().then(() => {
   remove(loadingComponent);
   tasksBoardPresenter.init();
 });
+
