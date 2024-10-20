@@ -42,3 +42,4 @@ tasksModel.init().then(() => {
   tasksBoardPresenter.init();
 });
 
+// проверка прикола
