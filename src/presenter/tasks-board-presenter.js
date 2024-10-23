@@ -45,7 +45,8 @@ export default class TasksBoardPresenter {
     const statuses = [Status.BACKLOG, Status.INPROGRESS, Status.COMPLETED, Status.RESYCLEBIN];
     
     statuses.forEach((status) => {
-      const tasksListComponent = new TasksListComponent({status, statusLabel: StatusLabel[status]});
+      const tasksListComponent = new TasksListComponent({status, statusLabel: StatusLabel[status],
+        onTaskDrop: this.#handleTaskDrop.bind(this)});
       render(tasksListComponent, this.#tasksBoardComponent.element);
 
       if (status === Status.RESYCLEBIN) {
@@ -54,6 +55,10 @@ export default class TasksBoardPresenter {
         this.#renderTasksList(status, tasksListComponent);
       }
     });
+  }
+
+  #handleTaskDrop(taskId, newStatus) {
+    this.#tasksModel.updateTaskStatus(taskId, newStatus);
   }
 
   #renderTasksList(status, tasksListComponent) {

@@ -79,3 +79,7 @@ li::before {
     font-style: italic;
     margin-top: 10px;
 }
+
+.drag-over {
+    border-top: 2px dashed #aaa; /* Добавляем визуальное обозначение */
+}
