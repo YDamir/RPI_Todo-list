@@ -34,4 +34,19 @@ export default class TasksModel {
     }
   }
   
+  updateTaskOrder(draggedTaskId, targetTaskId) {
+    const draggedIndex = this.#boardTasks.findIndex(task => task.id === draggedTaskId);
+    const targetIndex = this.#boardTasks.findIndex(task => task.id === targetTaskId);
+  
+    if (draggedIndex !== -1) {
+      const [draggedTask] = this.#boardTasks.splice(draggedIndex, 1);
+  
+      if (targetIndex !== -1) {
+        this.#boardTasks.splice(targetIndex, 0, draggedTask);
+      } else {
+        this.#boardTasks.push(draggedTask);
+      }
+      this.#notifyObservers();
+    }
+  }
 }

@@ -45,10 +45,14 @@ export default class TasksBoardPresenter {
     const statuses = [Status.BACKLOG, Status.INPROGRESS, Status.COMPLETED, Status.RESYCLEBIN];
     
     statuses.forEach((status) => {
-      const tasksListComponent = new TasksListComponent({status, statusLabel: StatusLabel[status],
-        onTaskDrop: this.#handleTaskDrop.bind(this)});
+      const tasksListComponent = new TasksListComponent({
+        status, 
+        statusLabel: StatusLabel[status],
+        onTaskDrop: this.#handleTaskDrop.bind(this)
+      });
+  
       render(tasksListComponent, this.#tasksBoardComponent.element);
-
+  
       if (status === Status.RESYCLEBIN) {
         this.#renderRecycleBinTasks(tasksListComponent);
       } else {
@@ -56,39 +60,57 @@ export default class TasksBoardPresenter {
       }
     });
   }
-
-  #handleTaskDrop(taskId, newStatus) {
-    this.#tasksModel.updateTaskStatus(taskId, newStatus);
+  
+  #handleTaskDrop(taskId, newStatus, targetTaskId = null) {
+    const isSameStatus = this.#boardTasks.find(task => task.id === taskId).status === newStatus;
+  
+    if (isSameStatus && targetTaskId) {
+      this.#tasksModel.updateTaskOrder(taskId, targetTaskId);
+    } else {
+      this.#tasksModel.updateTaskStatus(taskId, newStatus);
+  
+      if (targetTaskId) {
+        this.#tasksModel.updateTaskOrder(taskId, targetTaskId);
+      }
+    }
+  
+    this.#handleModelChange();
   }
-
+  
   #renderTasksList(status, tasksListComponent) {
     const tasksForStatus = this.#boardTasks.filter((task) => task.status === status);
-    
+    const taskListContainer = tasksListComponent.element.querySelector('.task-list');
+
     if (tasksForStatus.length === 0) {
       this.#renderNoTask(tasksListComponent);
     } else {
-      tasksForStatus.forEach((task) => this.#renderTask(task, tasksListComponent.element));
+      tasksForStatus.forEach((task) => this.#renderTask(task, taskListContainer));
+    }
+  
+    if (status === Status.RESYCLEBIN) {
+      this.#renderClearButton(taskListContainer);
     }
   }
 
   #renderRecycleBinTasks(tasksListComponent) {
     const tasksInBin = this.#boardTasks.filter((task) => task.status === Status.RESYCLEBIN);
-
+    const taskListContainer = tasksListComponent.element.querySelector('.task-list');
+  
     if (tasksInBin.length === 0) {
       this.#renderNoTask(tasksListComponent);
     } else {
-      tasksInBin.forEach((task) => this.#renderTask(task, tasksListComponent.element));
+      tasksInBin.forEach((task) => this.#renderTask(task, taskListContainer));
     }
-
-    this.#renderClearButton(tasksListComponent);
+  
+    this.#renderClearButton(taskListContainer);
   }
-
+  
   #renderTask(task, container) {
     const taskPresenter = new TaskPresenter(container, this.#handleModelChange);
     this.#taskPresenters.set(task.id, taskPresenter);
     taskPresenter.init(task);
   }
-
+  
   #clearTaskPresenters() {
     this.#taskPresenters.forEach((presenter) => presenter.destroy());
     this.#taskPresenters.clear();
@@ -96,16 +118,17 @@ export default class TasksBoardPresenter {
 
   #renderNoTask(tasksListComponent) {
     const noTaskComponent = new NoTaskComponent();
-    render(noTaskComponent, tasksListComponent.element);
+    const taskListContainer = tasksListComponent.element.querySelector('.task-list');
+    render(noTaskComponent, taskListContainer);
   }
-
-  #renderClearButton(tasksListComponent) {
+  
+  #renderClearButton(taskListContainer) {
     const clearButtonComponent = new ClearButtonComponent();
-    render(clearButtonComponent, tasksListComponent.element);
-
+    render(clearButtonComponent, taskListContainer);
+  
     clearButtonComponent.element.addEventListener('click', this.#handleClearBin.bind(this));
-  }
-
+  }  
+  
   #handleClearBin() {
     this.#tasksModel.clearTasksInResycleBin();
     this.#handleModelChange();

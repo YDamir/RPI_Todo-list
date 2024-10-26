@@ -81,5 +81,5 @@ li::before {
 }
 
 .drag-over {
-    border-top: 2px dashed #aaa; /* Добавляем визуальное обозначение */
+    border-top: 2px dashed #aaa;
 }
