@@ -20,10 +20,11 @@ export default class TasksBoardPresenter {
     this.#tasksModel.addObserver(this.#handleModelChange.bind(this));
   }
 
-  init() {
-    this.#boardTasks = [...this.#tasksModel.tasks];
+  async init() {
+    await this.#tasksModel.init(); // Инициализация данных с сервера
     this.#renderBoard();
   }
+  
 
   handleAddNewTask(taskTitle) {
     const newTask = {
