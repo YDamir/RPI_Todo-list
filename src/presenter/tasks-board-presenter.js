@@ -125,8 +125,22 @@ export default class TasksBoardPresenter {
   #renderClearButton(taskListContainer) {
     const clearButtonComponent = new ClearButtonComponent();
     render(clearButtonComponent, taskListContainer);
-  
-    clearButtonComponent.element.addEventListener('click', this.#handleClearBin.bind(this));
+
+    const clearButtonElement = clearButtonComponent.element;
+
+    if (this.#boardTasks.filter((task) => task.status === Status.RESYCLEBIN).length === 0) {
+        clearButtonElement.disabled = true;
+        clearButtonElement.classList.add('inactive');
+    }
+
+    clearButtonElement.addEventListener('click', (event) => {
+        if (clearButtonElement.disabled) {
+            event.preventDefault();
+            return;
+        }
+
+        this.#handleClearBin();
+    });
   }  
   
   #handleClearBin() {
