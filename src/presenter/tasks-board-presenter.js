@@ -181,6 +181,4 @@ export default class TasksBoardPresenter {
   #clearBoard() {
     this.#tasksBoardComponent.element.innerHTML = '';
   }
-
-  
 }
