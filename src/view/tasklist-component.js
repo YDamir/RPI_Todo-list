@@ -1,4 +1,4 @@
-import {AbstractComponent} from '/src/framework/view/abstract-component.js';
+import {AbstractComponent} from '../framework/view/abstract-component.js';
 
 function createTaskListComponentTemplate(status, statusLabel) {
   return (

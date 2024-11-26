@@ -25,4 +25,4 @@ const UpdateType = {
     INIT: 'INIT',
 };
 
-export {Status, StatusLabel};
+export {Status, StatusLabel, UserAction, UpdateType};

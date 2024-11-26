@@ -9,16 +9,18 @@ const Method = {
 
 export default class TasksApiService extends ApiService {
   get tasks() {
-    return this._load({ url: 'tasks' }).then(ApiService.parseResponse);
+    return this._load({ url: 'tasks' })
+    .then(ApiService.parseResponse);
   }
 
   async addTask(task) {
-    const response = await this._load({
-      url: 'tasks',
-      method: Method.POST,
+    const response = await this._load({ 
+      url: 'tasks', 
+      method: Method.POST, 
       body: JSON.stringify(task),
       headers: new Headers({ 'Content-Type': 'application/json' }),
     });
+
     return ApiService.parseResponse(response);
   }
 
@@ -29,13 +31,31 @@ export default class TasksApiService extends ApiService {
       body: JSON.stringify(task),
       headers: new Headers({ 'Content-Type': 'application/json' }),
     });
-    return ApiService.parseResponse(response);
+  
+    if (!response.ok) {
+      throw new Error(`${response.status}: ${response.statusText}`);
+    }
+  
+    return await ApiService.parseResponse(response);
   }
+  
 
-  async deleteTask(id) {
-    await this._load({
-      url: `tasks/${id}`,
-      method: Method.DELETE,
+  async updateTaskOrder(tasks) {
+    try {
+      for (const task of tasks) {
+        await this.updateTask(task);
+      }
+    } catch (err) {
+      console.error('Ошибка при обновлении порядка задач:', err);
+      throw err;
+    }
+  }
+  
+
+  async deleteTask(taskId) {
+    await this._load({ 
+      url: `tasks/${taskId}`, 
+      method: Method.DELETE, 
     });
   }
 }

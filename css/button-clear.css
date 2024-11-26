@@ -13,3 +13,9 @@
 .resyclebin button:hover {
     background-color: #c9302c;
 }
+
+.inactive {
+    pointer-events: none;
+    opacity: 0.5;
+    cursor: default;
+}

@@ -1,4 +1,4 @@
-import {AbstractComponent} from '/src/framework/view/abstract-component.js';
+import {AbstractComponent} from '../framework/view/abstract-component.js';
 
 function createClearButtonComponentTemplate() {
     return (
@@ -21,5 +21,5 @@ export default class ClearButtonComponent extends AbstractComponent {
 
     disable() {
         this.element.disabled = true;
-    }
+    }    
 }

@@ -1,5 +1,5 @@
-import TaskComponent from '/src/view/task-component.js';
-import {render, remove} from '/src/framework/render.js';
+import TaskComponent from '../view/task-component.js';
+import {render, remove} from '../framework/render.js';
 
 export default class TaskPresenter {
   #taskContainer = null;
