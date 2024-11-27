@@ -9,10 +9,6 @@ export default class TasksModel extends Observable {
   constructor({ tasksApiService }) {
     super();
     this.#tasksApiService = tasksApiService;
-
-    this.#tasksApiService.tasks.then((tasks) => {
-      console.log(tasks);
-    });
   }
 
   get tasks() {
@@ -69,28 +65,24 @@ export default class TasksModel extends Observable {
   }
 
   async updateTaskOrder(taskId, targetTaskId) {
-    const taskIndex = this.#boardTasks.findIndex(task => task.id === taskId);
-    const targetIndex = this.#boardTasks.findIndex(task => task.id === targetTaskId);
+    const task = this.#boardTasks.find((task) => task.id === taskId);
+    const targetTask = this.#boardTasks.find((task) => task.id === targetTaskId);
   
-    if (taskIndex === -1 || targetIndex === -1) {
-      console.error(`Ошибка: задача с id ${taskId} или ${targetTaskId} не найдена`);
-      return;
-    }
+    if (task && targetTask) {
+      this.#boardTasks.splice(this.#boardTasks.indexOf(task), 1);
+      const targetIndex = this.#boardTasks.indexOf(targetTask);
+      this.#boardTasks.splice(targetIndex, 0, task);
   
-    const [movedTask] = this.#boardTasks.splice(taskIndex, 1);
-    this.#boardTasks.splice(targetIndex, 0, movedTask);
-  
-    try {
-      
-      await this.#tasksApiService.updateTaskOrder(this.#boardTasks);
-      this._notify(UserAction.UPDATE_TASK_ORDER);
-    } catch (err) {
-      console.error('Ошибка при обновлении порядка задач на сервере:', err);
-      throw err;
+      try {
+        await Promise.all(this.#boardTasks.map((updatedTask) => this.#tasksApiService.updateTask(updatedTask)));
+        this._notify(UserAction.UPDATE_TASK_ORDER, this.#boardTasks);
+      } catch (err) {
+        console.error('Ошибка при обновлении порядка задач:', err);
+        throw err;
+      }
     }
   }
   
-
   deleteTask(taskId) {
     this.#boardTasks = this.#boardTasks.filter((task) => task.id !== taskId);
     this._notify(UserAction.DELETE_TASK, {id: taskId});

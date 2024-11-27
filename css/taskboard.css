@@ -12,24 +12,22 @@
     z-index: 1000;  /* Поверх всех элементов */
   }
 
-  @keyframes spin {
-    to {
+@keyframes spin {
+  to {
       transform: rotate(360deg);
-    }
   }
+}
   
-  /* Скрытие индикатора по умолчанию */
-  .hidden {
-    display: none;
-  }
+.hidden {
+  display: none;
+}
   
-  /* Блокировка интерфейса */
-  .blocking-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.7);  /* Полупрозрачный фон */
-    z-index: 999;  /* Ниже индикатора загрузки */
-  }
+.blocking-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.7); 
+  z-index: 999;
+}

@@ -56,13 +56,13 @@ export default class TasksBoardPresenter {
   }
   
   async #handleTaskDrop(taskId, newStatus, targetTaskId = null) {
-    const task = this.#boardTasks.find(task => task.id === taskId);
-    if (!task) {
-      console.error(`Ошибка: задача с id ${taskId} не найдена`);
-      return;
-    }
-  
     try {
+      const task = this.#boardTasks.find(task => task.id === taskId);
+      if (!task) {
+        console.error(`Ошибка: задача с id ${taskId} не найдена`);
+        return;
+      }
+  
       const isSameStatus = task.status === newStatus;
   
       if (isSameStatus && targetTaskId) {
@@ -80,8 +80,6 @@ export default class TasksBoardPresenter {
       console.error('Ошибка при обновлении статуса задачи:', err);
     }
   }
-  
-  
   
   #renderTasksList(status, tasksListComponent) {
     const tasksForStatus = this.#boardTasks.filter((task) => task.status === status);

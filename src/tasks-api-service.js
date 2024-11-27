@@ -27,30 +27,30 @@ export default class TasksApiService extends ApiService {
   async updateTask(task) {
     const response = await this._load({
       url: `tasks/${task.id}`,
-      method: Method.PUT,
+      method: 'PUT',
       body: JSON.stringify(task),
-      headers: new Headers({ 'Content-Type': 'application/json' }),
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      }),
     });
   
-    if (!response.ok) {
-      throw new Error(`${response.status}: ${response.statusText}`);
-    }
-  
-    return await ApiService.parseResponse(response);
+    const parsedResponse = await ApiService.parseResponse(response);
+    return parsedResponse;
   }
-  
 
   async updateTaskOrder(tasks) {
-    try {
-      for (const task of tasks) {
-        await this.updateTask(task);
-      }
-    } catch (err) {
-      console.error('Ошибка при обновлении порядка задач:', err);
-      throw err;
-    }
-  }
+    const response = await this._load({
+      url: 'tasks/order',
+      method: Method.PUT,
+      body: JSON.stringify(tasks),
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      }),
+    });
   
+    const parsedResponse = await ApiService.parseResponse(response);
+    return parsedResponse;
+  }
 
   async deleteTask(taskId) {
     await this._load({ 
